@@ -1,9 +1,7 @@
 package io.classroom.ClassRoom.students;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +17,24 @@ public class StudentController {
 
     @GetMapping
     public List<Student> getStudent() {
-        return studentService.getstudent();
+        return studentService.getStudent();
+    }
+
+    @PostMapping()
+    public String newStudent(@RequestBody Student student) {
+        return studentService.addNewStudent(student);
+    }
+
+    @DeleteMapping(path = "{studentId}")
+    public String deleteStudent(@PathVariable("studentId") Long id) {
+        return studentService.deleteStudent(id);
+    }
+
+    @PutMapping(path = "{studentId}")
+    public String updateStudent(
+            @PathVariable("studentId") Long id,
+            @RequestParam(required = false) String email
+    ) {
+        return studentService.updateStudent(id, email);
     }
 }
