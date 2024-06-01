@@ -2,9 +2,7 @@ package io.classroom.ClassRoom.teachers;
 
 import io.classroom.ClassRoom.students.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +21,22 @@ public class TeacherController {
         return teacherService.getTeachers();
     }
 
+    @PostMapping
+    public String newTeacher(@RequestBody Teacher teacher) {
+        return teacherService.addNewTeacher(teacher);
+    }
+
+    @DeleteMapping(path = "{teacherId}")
+    public String deleteTeacher(@PathVariable("teacherId") Long id){
+        return teacherService.deleteTeacher(id);
+    }
+
+    @PutMapping(path = "{teacherId}")
+    public String updateTeacher(
+            @PathVariable("teacherId") Long id,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String subject
+    ) {
+        return teacherService.updateTeacher(id, email, subject);
+    }
 }

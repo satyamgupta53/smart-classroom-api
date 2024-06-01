@@ -11,7 +11,7 @@ import java.util.List;
 @Configuration
 public class TeacherConfig {
     @Bean
-    CommandLineRunner commandLineRunner(TeacherRepository teacherRepository) {
+    CommandLineRunner teacherLineRunner(TeacherRepository teacherRepository) {
         return args -> {
             Teacher aman = new Teacher(
                     "aman",
