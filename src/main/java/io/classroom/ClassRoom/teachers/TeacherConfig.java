@@ -14,11 +14,11 @@ public class TeacherConfig {
     CommandLineRunner teacherLineRunner(TeacherRepository teacherRepository) {
         return args -> {
             Teacher aman = new Teacher(
-                    "aman",
-                    "vishwa",
+                    "Aman",
+                    "Vishwa",
                     "aman.lpu@gmmail.com",
                     LocalDate.of(1987, Month.APRIL, 18),
-                    "maths"
+                    "Maths"
             );
 
             Teacher shivani = new Teacher(

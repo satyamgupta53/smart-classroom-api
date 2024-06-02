@@ -8,9 +8,7 @@ import java.time.LocalDate;
 
 @Setter @Getter
 @Entity(name = "teacher")
-@Table(name = "teacher", uniqueConstraints = {
-        @UniqueConstraint(name = "unique_email_address", columnNames = "email_address")
-})
+@Table(name = "teacher")
 public class Teacher {
 
     @Id
