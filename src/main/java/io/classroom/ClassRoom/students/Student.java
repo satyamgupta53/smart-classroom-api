@@ -1,12 +1,16 @@
 package io.classroom.ClassRoom.students;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.Period;
 
-@Entity
-@Table
+@Getter @Setter
+@Entity(name = "student")
+@Table(name = "student", uniqueConstraints = {
+        @UniqueConstraint(name = "unique_email_address", columnNames = "email_address")
+})
 public class Student {
 
     @Id
@@ -21,27 +25,42 @@ public class Student {
             generator = "student_sequence"
     )
 
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private long id;
+
+    @Column(
+            name = "first_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String firstName;
+
+    @Column(
+            name = "last_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String lastName;
+
+    @Column(
+            name = "email_address",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String email;
+
+    @Column(
+            name = "date_of_birth"
+    )
     private LocalDate dob;
+
     @Transient
     private int age;
 
     public Student() {
-    }
-
-    public Student(long id,
-                   String firstName,
-                   String lastName,
-                   String email,
-                   LocalDate dob) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.dob = dob;
     }
 
     public Student(String firstName,
@@ -52,54 +71,6 @@ public class Student {
         this.lastName = lastName;
         this.email = email;
         this.dob = dob;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public int getAge() {
-        return Period.between(dob, LocalDate.now()).getYears();
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     @Override

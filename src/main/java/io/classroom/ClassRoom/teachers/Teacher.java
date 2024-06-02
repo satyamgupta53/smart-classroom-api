@@ -1,11 +1,16 @@
 package io.classroom.ClassRoom.teachers;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Entity
-@Table
+@Setter @Getter
+@Entity(name = "teacher")
+@Table(name = "teacher", uniqueConstraints = {
+        @UniqueConstraint(name = "unique_email_address", columnNames = "email_address")
+})
 public class Teacher {
 
     @Id
@@ -20,28 +25,46 @@ public class Teacher {
             generator = "teacher_sequence"
     )
 
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private long id;
+
+
+    @Column(
+            name = "first_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String firstName;
+
+    @Column(
+            name = "last_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String lastName;
+
+    @Column(
+            name = "email_address",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String email;
+
+    @Column(
+            name = "date_of_birth"
+    )
     private LocalDate dob;
+
+    @Column(
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String subject;
 
     public Teacher() {
-    }
-
-    public Teacher(long id,
-                   String firstName,
-                   String lastName,
-                   String email,
-                   LocalDate dob,
-                   String subject) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.dob = dob;
-        this.subject = subject;
     }
 
     public Teacher(String firstName,
@@ -53,54 +76,6 @@ public class Teacher {
         this.lastName = lastName;
         this.email = email;
         this.dob = dob;
-        this.subject = subject;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
         this.subject = subject;
     }
 
